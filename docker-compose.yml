@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  #the name of service
+  app:
+    #build of the config
+    build:
+      # . us current dirctory that we're running docker compose from
+      context: .
+    ports:
+      #map project from port 800 on my host to port 8000 on the imge
+      - "8000:8000"
+    #volumes allows the get the updates the i make to the project into docker image in real time
+    volumes:
+      # map the app in the directory project to the app in directory in docker image
+      - ./app:/app
+
+    #the command that use to run the app in docker container
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
